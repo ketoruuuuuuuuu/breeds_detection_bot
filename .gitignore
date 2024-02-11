@@ -1,5 +1,5 @@
-valid/labels.cache
-train/labels.cache
+training/valid/labels.cache
+training/train/labels.cache
 
 #sensetive data
 config.yaml
