@@ -12,7 +12,7 @@ import pytz
 
 def calculate_iou(bbox1, bbox2):
     '''calculates intersection over union
-    
+
     PARAMETERS:
         bbox1: ultralytics.engine.results.Boxes
         bbox2: ultralytics.engine.results.Boxes
@@ -198,3 +198,15 @@ def get_msg_data(message):
     df.loc[len(df.index)] = [user_id, user_name, msg_info, now]
     df.to_csv('msg_logs.csv')
     print('got new message: {} | {} | {}'.format(user_name,msg_info,now))
+
+
+# def unpack_metrics(message):
+#     type_paths = {'map50':'metrics/metrics_map50.md','pressicion':'metrics/metrics_p.md','recall':'metrics/metrics_r.md','map50-95':'metrics/metrics_map_50_95.md'}
+#     path = type_paths[message.text]
+#     with open(path,'r') as m:
+#         metrics = m.readlines()
+#         m1 = ''.join(metrics[0:35])
+#         m2 = ''.join(metrics[35:70])
+#         m3 = ''.join(metrics[70:105])
+#         m4 = ''.join(metrics[105:])
+#     return m1,m2,m3,m4

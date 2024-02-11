@@ -126,24 +126,45 @@ def start_detection_dialog_(message):
     start_detection_dialog(message)
 
 
-@bot.message_handler(commands=['metrcis'])
-def send_metrics(message):
+@bot.message_handler(commands=['metrics'])
+def ask_metrics(message):
     get_msg_data(message)
-    bot.send_message(message.from_user.id,'тут будут метрики')
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    btn0 = types.KeyboardButton("map50")
+    btn1 = types.KeyboardButton("pressicion")
+    btn2 = types.KeyboardButton("recall")
+    btn3 = types.KeyboardButton("map50-95")
+    markup.add(btn0)
+    markup.add(btn1)
+    markup.add(btn2)
+    markup.add(btn3)
+    bot.send_message(message.from_user.id,'Какую метрику отправить?', reply_markup=markup)
 
 @bot.message_handler(commands=['about'])
 def send_about(message):
     get_msg_data(message)
-    bot.send_message(message.from_user.id,'тут будет about')
+    markup = types.InlineKeyboardMarkup()
+    btn1 = types.InlineKeyboardButton(text='github', url='https://guthib.com/')
+    btn2 = types.InlineKeyboardButton(text='автор', url='https://t.me/ketoruu')
+    markup.add(btn1)
+    markup.add(btn2)
+    bot.send_message(message.from_user.id,'Yolov8s с кастомными весами.\nНатренированна на Stanford dogs dataset, 120 классов.',reply_markup=markup)
 
 @bot.message_handler(func=lambda message: message.text == 'Метрики')
-def send_metrics_(message):
-    send_metrics(message)
+def ask_metrics_(message):
+    ask_metrics(message)
 
 @bot.message_handler(func=lambda message: message.text == 'О проекте')
 def send_about_(message):
     send_about(message)
 
+
+@bot.message_handler(func=lambda message: message.text in ['map50','pressicion','recall','map50-95'])
+def send_metrics(message):
+    get_msg_data(message)
+    type_paths = {'map50':'metrics/metrics_map50.pdf','pressicion':'metrics/metrics_p.pdf','recall':'metrics/metrics_r.pdf','map50-95':'metrics/metrics_map_50_95.pdf'}
+    path = type_paths[message.text]
+    bot.send_document(message.from_user.id,InputFile(path))
 
 
 @bot.message_handler(content_types=['text'])
