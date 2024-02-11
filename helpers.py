@@ -10,8 +10,15 @@ from PIL import ImageDraw, Image
 from datetime import datetime
 import pytz
 
-def calculate_iou(bbox1,bbox2):
-    #todo add comment
+def calculate_iou(bbox1, bbox2):
+    '''calculates intersection over union
+    
+    PARAMETERS:
+        bbox1: ultralytics.engine.results.Boxes
+        bbox2: ultralytics.engine.results.Boxes
+    RETURNS:
+        float
+    '''
     bbox1,bbox2 = bbox1.xyxy.numpy()[0],bbox2.xyxy.numpy()[0]
     w=0
     h=0
@@ -27,7 +34,14 @@ def calculate_iou(bbox1,bbox2):
 
 
 def delete_overlaps(boxes,threshold):
-    #todo add comment
+    '''deletes bboxes with less confidance among bboxes with iou >= threshold
+
+    PARAMETERS:
+        boxes: ultralytics.engine.results.Boxes
+        threshold: float [0,1]
+    RETURNS:
+        list of ultralytics.engine.results.Boxes
+    '''
     stop = False
     bboxes = dict(enumerate(boxes))
     if len(bboxes) <2:
@@ -63,9 +77,17 @@ def delete_overlaps(boxes,threshold):
 
 
 def illustrate_boxes(preds,cl_map,threshold, img):
-    #todo add comment
+    '''draws bboxes 
+
+    PARAMETERS:
+        preds: ultralytics.engine.results.Results, predictions 
+        cl_map: dict, class map
+        threshold: float, threshold for iou
+        img: PIL.Image, image to which add bboxes
+    RETURNS:
+        PIL.Image object 
+    '''
     colors = [(190, 110, 70),(198, 171, 123),(205, 231, 176),(163, 191, 168),(139, 163, 164),(114, 134, 160),(11, 79, 108)]
-    # font = cv2.FONT_HERSHEY_SIMPLEX
     img1 = Image.fromarray(img)
     draw = ImageDraw.Draw(img1)
     boxes = delete_overlaps(preds.boxes,threshold) 

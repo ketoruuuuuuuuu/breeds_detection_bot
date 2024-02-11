@@ -30,8 +30,8 @@ greeting = '\n'.join(["Привет, я котенок по имени Гав.",
         "Я знаю более 100 различных пород собак и помогу тебе определить породу по картинке или видео",
         "Выбирай 'Определить породу' или просто отправь мне фотографию или видео"
         ])
-cl_map = read_class_map('class_mapping.csv')
 
+cl_map = read_class_map('class_mapping.csv')
 
 path_to_weights = os.path.join(os.getcwd(),'weights/best_60.pt')
 model = YOLO(path_to_weights)
