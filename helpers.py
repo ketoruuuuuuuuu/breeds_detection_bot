@@ -82,7 +82,7 @@ def illustrate_boxes(preds,cl_map,threshold, img):
     RETURNS:
         PIL.Image object 
     '''
-    colors = [(190, 110, 70),(198, 171, 123),(205, 231, 176),(163, 191, 168),(139, 163, 164),(114, 134, 160),(11, 79, 108)]
+    colors = [(195, 35, 126),(147, 35, 160),(114, 35, 183),(98, 35, 194),(67, 115, 146),(51, 155, 122),(35, 194, 98)]
     img1 = Image.fromarray(img)
     draw = ImageDraw.Draw(img1)
     boxes = delete_overlaps(preds.boxes,threshold,cl_map) 
@@ -114,16 +114,16 @@ def illustrate_boxes(preds,cl_map,threshold, img):
         #this way smol bboxes don't look ugly af
         if w_bbox <= 100:
             thickness = 1
-            size = 8
+            size = 10
         elif w_bbox <= 200:
             thickness = 2
-            size = 12
+            size = 15
         elif min(img.shape[:1]) <= 450:
-            thickness = 4
-            size = 30
+            thickness = 3
+            size = 20
         else:
-            thickness = 5
-            size = 35
+            thickness = 4
+            size = 25
         
         draw.rounded_rectangle(bbox,outline=clr,width=thickness,corners=(True,True,True,True),radius=4)
         w_text = int(draw.textlength(labels[l],font_size=size))
