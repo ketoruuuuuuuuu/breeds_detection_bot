@@ -1,9 +1,9 @@
 from ultralytics import YOLO
 import telebot
 from telebot import types
-from telebot.types import InputFile, InputMediaVideo
+from telebot.types import InputFile
 import os
-import pandas as pd
+# import pandas as pd
 from PIL import Image
 import io
 import numpy as np
@@ -33,7 +33,7 @@ greeting = '\n'.join(["Привет, я котенок по имени Гав.",
 
 cl_map = read_class_map('class_mapping.csv')
 
-path_to_weights = os.path.join(os.getcwd(),'weights/best_60.pt')
+path_to_weights = os.path.join(os.getcwd(),'weights/last_80.pt')
 model = YOLO(path_to_weights)
 print('model loaded')
 
@@ -65,7 +65,7 @@ def handle_photo(message):
     bot.edit_message_text('Обработка завершена',message.from_user.id,msg.message_id)
     if len(preds[0].boxes.cls) != 0:
         img = np.array(img)
-        img_to_save = illustrate_boxes(preds[0],cl_map,0.8,img)
+        img_to_save = illustrate_boxes(preds[0],cl_map,0.7,img)
         # img_to_save = Image.fromarray(img_to_save)
         save_path = 'saved_temp/photo_from_{}.jpg'.format(message.from_user.username)
         img_to_save.save(save_path)
