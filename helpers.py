@@ -32,54 +32,6 @@ def calculate_iou(bbox1, bbox2):
     iou = overlap/(area1+area2-overlap)
     return iou
 
-
-# def delete_overlaps(boxes,threshold,cl_map = None):
-#     '''deletes bboxes with less confidance among bboxes with iou >= threshold
-
-#     PARAMETERS:
-#         boxes: ultralytics.engine.results.Boxes
-#         threshold: float [0,1]
-#     RETURNS:
-#         list of ultralytics.engine.results.Boxes
-#     '''
-#     stop = False
-#     bboxes = dict(enumerate(boxes))
-#     if len(bboxes) <2:
-#         stop = True
-#     i = 0
-#     j = 1
-#     while not stop:
-#         bbox1 = bboxes[i]
-#         bbox2 = bboxes[j]
-#         iou = calculate_iou(bbox1,bbox2)
-#         print('----------------------------------------------')
-#         print('i : {}, j : {}, dict : {}'.format(i,j,list(bboxes.keys())))
-#         print(iou)
-#         print(cl_map[bbox1.cls.numpy()[0]],bbox1.conf.numpy())
-#         print(cl_map[bbox2.cls.numpy()[0]],bbox2.conf.numpy())
-#         if iou >= threshold:
-#             useless_box_id = np.argmin((bbox1.conf.numpy()[0],bbox2.conf.numpy()[0]))
-#             # bboxes.pop(useless_box_id)
-#             print('before del')
-#             print('i :{},j:{}, dict:{}'.format(i,j,list(bboxes.keys())))
-#             if useless_box_id == 0:
-#                 bboxes.pop(i)
-#                 i+= 1
-#             else:
-#                 bboxes.pop(j)
-#                 j+= 1
-#             print('after del')
-#             print('i : {}, j : {},dict : {}'.format(i,j,list(bboxes.keys())))
-#         else:
-#             j+= 1
-#         if j > max(list(bboxes.keys())):
-#             i+= 1
-#             j = i+1
-#         if i >= sorted(list(bboxes.keys()))[-1]:
-#             stop = True
-#         # print(list(bboxes.values()))
-#     return list(bboxes.values())
-
 def delete_overlaps(boxes,threshold,cl_map = None):
     '''deletes bboxes with less confidance among bboxes with iou >= threshold
 
