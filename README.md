@@ -15,7 +15,7 @@ MAP50 на всех классах: 0.43
 ### Примеры
 ![plot](examples/22.jpg) 
 ![plot](examples/12.jpg)
-![plot](examples/7.jpg)
+![plot](examples/14.jpg)
 
 
 Больше примеров можно посмотреть [здесь](examples)
