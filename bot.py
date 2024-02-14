@@ -177,9 +177,6 @@ def get_text_messages(message):
         bot.send_message(message.from_user.id, 'Пока, если тебе понравилось, посмотри мои остальные проекты на github',reply_markup=markup)
         bot.send_document(message.from_user.id, document="CAACAgIAAxkBAAElhLVk7-Laa9CXFIWa6Tj1l8vB9-_WfQACGBkAAp4WoUhNBRp4s3ZdGzAE")
 
-    elif str(message.text).lower() ==  'хуй':
-        bot.send_document(message.from_user.id, document="CAACAgQAAxkBAAElhLdk7-PhZBJS1t5ejfNSAAHZq0HjkKwAAvsAAw-q9AdB7mhhzhiekTAE")
-
     elif str(message.text).lower() in thanks:
         bot.send_message(message.from_user.id, 'Всегда пожалуйста')
         bot.send_sticker(message.from_user.id, 'CAACAgIAAxkBAAElifBk8KwDUqQTS0au9nwo6hqSkyNCQgACoBwAAipooUjogwEq_q_PRzAE')
